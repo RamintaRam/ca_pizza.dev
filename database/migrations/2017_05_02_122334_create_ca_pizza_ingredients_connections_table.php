@@ -14,7 +14,7 @@ class CreateCaPizzaIngredientsConnectionsTable extends Migration {
 	{
 		Schema::create('ca_pizza_ingredients_connections', function(Blueprint $table)
 		{
-            $table->string('id', 36)->unique('id_UNIQUE');
+			$table->string('id', 36)->unique('category_id_UNIQUE');
 			$table->string('name');
 			$table->integer('count', true);
 			$table->timestamps();
