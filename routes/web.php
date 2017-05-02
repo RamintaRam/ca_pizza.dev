@@ -33,15 +33,23 @@ Route::group(['prefix' => 'pad'], function ()
 });
 
 
+Route::group(['prefix' => 'ingredients'], function ()
+{
+    Route::get('/create', function ()
+    {
+        return view('ingredients');
+    });
 
+    Route::post('/create', ['as' => 'app.ingredients.create', 'uses' => 'CAPizzaIngredientsController@create']);
+});
 
 
 
 
 Route::group(['prefix' => 'pizza'], function ()
 {
-    Route::get('/create', ['uses' => 'CACheeseController@showCreate']);
+    Route::get('/create', ['uses' => 'CAPizzaIngredientsConnectionsController@showCreate']);
 
-    Route::post('/create', ['as' => 'app.people.create', 'uses' => 'HOBPeopleController@create']);
+    Route::post('/create', ['as' => 'app.pizza.create', 'uses' => 'CAPizzaIngredientsConnectionsController@create']);
 });
 
