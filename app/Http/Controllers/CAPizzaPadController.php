@@ -27,7 +27,7 @@ class CAPizzaPadController extends Controller {
         $data = request()->all();
 
         $record = CAPizzaPad::create(array(
-            'name' => $data['name']
+            'name' => $data['pad']
 
         ));
 
