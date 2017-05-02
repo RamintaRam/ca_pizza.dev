@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 <html>
-<body style="color: darkred; background-color: lightcyan">
+<body style="background-image: url('http://cdn1.buuteeq.com/upload/23279/pizza.jpg.1920x807_default.jpg'); color: #f5f8fa">
 
 @if(isset($name))
     <div style="background-color: lightgreen">Užsakymas pridėtas
