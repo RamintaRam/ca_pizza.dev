@@ -1,38 +1,45 @@
 
 <!DOCTYPE html>
 <html>
-<body style="color: darkred; background-color: black">
+<body style="color: darkred; background-color: lightcyan">
 
 @if(isset($name))
     <div style="background-color: lightgreen">Užsakymas pridėtas
-        sėkmingai: {{$name . ', ' . $email . ', ' . $age . ', ' . $gender  . ', id: ' . $id}}</div>
+        sėkmingai: {{$name  . ', id: ' . $id}}</div>
 
 @endif
 
-{!! Form::open(['url' => route('app.people.create')]) !!}
+{!! Form::open(['url' => route('app.pizza.create')]) !!}
 
-{{ Form::label('name', 'Name') }}
-{{ Form::text('name') }}
-<br>
-{{ Form::label('email', 'Email') }}
-{{ Form::text('email') }}
-<br>
 
-{{ Form::label('city', 'City') }}
-{{ Form::select('city_id', $cities) }}
 
-<br>
-{{ Form::label('pi', 'Hobbies') }}
-<br>
-@foreach($hobbies as $key => $hobby)
-    {{Form::checkbox('hobbies[]', $key)}}
-    {{$hobby}}
+Picos padas: <br>
+@foreach($pad as $key => $pad1)
+    {{Form::checkbox('pads[]', $key)}}
+    {{$pad1}}
     <br>
-    @endforeach
+@endforeach
 
-    {{ Form::submit('Submit')}}
+<br>
+Ingredientai :<br>
+@foreach($ingredients as $key => $ingredient)
+    {{Form::checkbox('ingredients[]', $key)}}
+    {{$ingredient}}
+    <br>
+@endforeach
+<br>
+Sūris: <br>
+@foreach($cheese as $key => $cheese)
+    {{Form::checkbox('hobbies[]', $key)}}
+    {{$cheese}}
+    <br>
+@endforeach
 
-    {!! Form::close() !!}
+
+
+{{ Form::submit('Submit')}}
+
+{!! Form::close() !!}
 
     </body>
     </html>
