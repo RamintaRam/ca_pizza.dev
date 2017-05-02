@@ -1,5 +1,9 @@
 <?php namespace App\Http\Controllers;
 
+use App\models\CAPizzaCheese;
+use App\models\CAPizzaIngredients;
+use App\models\CAPizzaIngredientsConnections;
+use App\models\CAPizzaPad;
 use Illuminate\Routing\Controller;
 
 class CAPizzaIngredientsConnectionsController extends Controller {
@@ -21,11 +25,31 @@ class CAPizzaIngredientsConnectionsController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
-	{
-		//
-	}
+    public function create()
+    {
+        $data = request()->all();
 
+        $record = CAPizzaIngredientsConnections::create($data);
+//        dd($data);
+        $record['ingredients'] = CAPizzaIngredients::pluck('name', 'id');
+
+
+
+        return view('form',  $record->toArray());
+    }
+
+
+    public function showCreate()
+    {
+        $configuration=[];
+        $configuration['cheese'] = CAPizzaCheese::pluck('name', 'id')->toArray();
+        $configuration['pad']  = CAPizzaPad::pluck('name', 'id')->toArray();
+        $configuration['ingredients']  = CAPizzaIngredients::pluck('name', 'id')->toArray();
+
+//        dd($configuration);
+
+        return view('form',  $configuration);
+    }
 	/**
 	 * Store a newly created resource in storage.
 	 * POST /capizzaingredientsconnections

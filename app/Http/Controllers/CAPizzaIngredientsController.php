@@ -27,7 +27,7 @@ class CAPizzaIngredientsController extends Controller {
         $data = request()->all();
 
         $record = CAPizzaIngredients::create(array(
-            'name' => $data['name']
+            'name' => $data['ingredients']
 
         ));
 
