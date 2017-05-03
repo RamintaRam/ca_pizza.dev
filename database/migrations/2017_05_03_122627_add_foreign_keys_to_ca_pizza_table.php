@@ -14,7 +14,8 @@ class AddForeignKeysToCaPizzaTable extends Migration {
 	{
 		Schema::table('ca_pizza', function(Blueprint $table)
 		{
-			$table->foreign('id', 'fk_ca_pizza_ca_pizza_ingredients_connections1')->references('id')->on('ca_pizza_ingredients_connections')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('cheese_id', 'fk_ca_pizza_ca_pizza_cheese1')->references('id')->on('ca_pizza_cheese')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('pad_id', 'fk_ca_pizza_ca_pizza_pad')->references('id')->on('ca_pizza_pad')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 		});
 	}
 
@@ -28,7 +29,8 @@ class AddForeignKeysToCaPizzaTable extends Migration {
 	{
 		Schema::table('ca_pizza', function(Blueprint $table)
 		{
-			$table->dropForeign('fk_ca_pizza_ca_pizza_ingredients_connections1');
+			$table->dropForeign('fk_ca_pizza_ca_pizza_cheese1');
+			$table->dropForeign('fk_ca_pizza_ca_pizza_pad');
 		});
 	}
 

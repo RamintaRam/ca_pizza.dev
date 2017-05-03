@@ -20,8 +20,8 @@ class CreateCaPizzaTable extends Migration {
 			$table->timestamps();
 			$table->softDeletes();
 			$table->string('comment')->nullable();
-			$table->string('cheese_id', 36)->nullable()->unique('cheese_id_UNIQUE');
-			$table->string('pad_id', 36)->unique('pad_id_UNIQUE');
+			$table->string('cheese_id', 36)->nullable()->index('cheese_id');
+			$table->string('pad_id', 36)->index('pad_id');
 		});
 	}
 
