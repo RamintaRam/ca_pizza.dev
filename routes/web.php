@@ -48,8 +48,8 @@ Route::group(['prefix' => 'ingredients'], function ()
 
 Route::group(['prefix' => 'pizza'], function ()
 {
-    Route::get('/create', ['uses' => 'CAPizzaIngredientsConnectionsController@showCreate']);
+    Route::get('/create', ['uses' => 'CAPizzaController@showCreate']);
 
-    Route::post('/create', ['as' => 'app.pizza.create', 'uses' => 'CAPizzaIngredientsConnectionsController@create']);
+    Route::post('/create', ['as' => 'app.pizza.create', 'uses' => 'CAPizzaController@create']);
 });
 
