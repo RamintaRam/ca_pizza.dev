@@ -32,7 +32,7 @@ class CAPizzaPadController extends Controller {
         ));
 
 
-        return view('form', $record->toArray());
+        return view('pad', $record->toArray());
     }
 
 	/**

@@ -32,7 +32,7 @@ class CAPizzaIngredientsController extends Controller {
         ));
 
 
-        return view('form', $record->toArray());
+        return view('ingredients', $record->toArray());
     }
 
 
