@@ -8,6 +8,6 @@ class CAPizzaIngredients extends CoreModel
 {
     protected $table = 'ca_pizza_ingredients';
 
-    protected $fillable = ['id', 'name'];
+    protected $fillable = ['id', 'ingredients', 'calories'];
 
 }

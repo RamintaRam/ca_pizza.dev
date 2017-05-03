@@ -11,3 +11,4 @@ class CAPizzaCheese extends CoreModel
     protected $fillable = ['id', 'name'];
 
 }
+

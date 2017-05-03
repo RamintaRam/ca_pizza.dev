@@ -7,6 +7,6 @@ class CAPizzaIngredientsConnections extends CoreModel
 {
     protected $table = 'ca_pizza_ingredients_connections';
 
-    protected $fillable = ['id', 'name', 'pad_id', 'cheese_id', 'ingredients_id'];
+    protected $fillable = ['name', 'pizza_id', 'ingredients_id'];
 
 }
