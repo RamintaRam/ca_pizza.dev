@@ -13,6 +13,9 @@
 {!! Form::open(['url' => route('app.pizza.create')]) !!}
 
 
+{{ Form::label('name', 'Name')}}
+{{ Form::text('name') }}
+
 
 Picos padas: <br>
 @foreach($pad as $key => $pad1)
@@ -28,6 +31,8 @@ Ingredientai :<br>
     {{$ingredient}}
     <br>
 @endforeach
+
+
 <br>
 Sūris: <br>
 @foreach($cheese as $key => $cheese)

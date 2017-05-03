@@ -3,8 +3,8 @@
 <html>
 <body>
 
-@if(isset($name))
-    <div> Ingrediento rūšis įvesta {{$name . ', id: ' . $id}}</div>
+@if(isset($ingredients))
+    <div> Ingrediento rūšis įvesta {{$ingredients . ', id: ' . $id}}</div>
 
 @endif
 
@@ -12,6 +12,11 @@
 
 {{ Form::label('ingredients', 'Ingredients')}}
 {{ Form::text('ingredients') }}
+
+
+{{ Form::label('calories', 'Calories')}}
+{{ Form::text('calories') }}
+
 
 {{ Form::submit('Submit')}}
 
