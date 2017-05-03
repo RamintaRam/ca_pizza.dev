@@ -1,5 +1,10 @@
 <?php namespace App\Http\Controllers;
 
+
+use App\models\CAPizza;
+use App\models\CAPizzaCheese;
+use App\models\CAPizzaIngredients;
+use App\models\CAPizzaPad;
 use Illuminate\Routing\Controller;
 
 class CAPizzaController extends Controller {
@@ -23,9 +28,36 @@ class CAPizzaController extends Controller {
 	 */
 	public function create()
     {
+        $data = request()->all();
+
+//        $record = CAPizza::create($data);
+        $record = CAPizza::create([
+            'name' => $data['name'],
+            'cheese_id' => $data['cheese'][0],
+            'pad_id' => $data['pads'][0],
+            'comment' =>'xxxxx'
+        ]);
+
+    $record->ingredientsInsert()->sync($data['ingredients']);
+
+//        return view('ingredients', $record->toArray());
+//
+//
+//        $configuration = [];
+//        $configuration['cheese'] = CAPizzaCheese::pluck('name', 'id')->toArray();
+//        $configuration['pad'] = CAPizzaPad::pluck('name', 'id')->toArray();
+//
+////        dd($configuration);
+//
+//        return view('form', $configuration);
+   }
+
+    public function showCreate()
+    {
         $configuration = [];
         $configuration['cheese'] = CAPizzaCheese::pluck('name', 'id')->toArray();
         $configuration['pad'] = CAPizzaPad::pluck('name', 'id')->toArray();
+        $configuration['ingredients'] = CAPizzaIngredients::pluck('ingredients', 'id', 'calories')->toArray();
 
 //        dd($configuration);
 

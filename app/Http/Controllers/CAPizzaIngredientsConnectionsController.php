@@ -32,7 +32,7 @@ class CAPizzaIngredientsConnectionsController extends Controller
 
         $record = CAPizzaIngredientsConnections::create($data);
 //        dd($data);
-        $record['ingredients'] = CAPizzaIngredients::pluck('name', 'id');
+        $record['ingredients'] = CAPizzaIngredients::pluck('name', 'id', 'calories');
 
 
         return view('form', $record->toArray());
@@ -46,7 +46,7 @@ class CAPizzaIngredientsConnectionsController extends Controller
         $configuration = [];
         $configuration['cheese'] = CAPizzaCheese::pluck('name', 'id')->toArray();
         $configuration['pad'] = CAPizzaPad::pluck('name', 'id')->toArray();
-        $configuration['ingredients'] = CAPizzaIngredients::pluck('name', 'id')->toArray();
+        $configuration['ingredients'] = CAPizzaIngredients::pluck('name', 'id', 'calories')->toArray();
 
 //        dd($configuration);
 
