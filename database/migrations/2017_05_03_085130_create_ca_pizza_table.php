@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateCaPizzaCheeseTable extends Migration {
+class CreateCaPizzaTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,13 +12,16 @@ class CreateCaPizzaCheeseTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('ca_pizza_cheese', function(Blueprint $table)
+		Schema::create('ca_pizza', function(Blueprint $table)
 		{
 			$table->string('id', 36)->unique('category_id_UNIQUE');
 			$table->string('name');
 			$table->integer('count', true);
 			$table->timestamps();
 			$table->softDeletes();
+			$table->string('comment')->nullable();
+			$table->string('cheese_id', 36)->nullable()->unique('cheese_id_UNIQUE');
+			$table->string('pad_id', 36)->unique('pad_id_UNIQUE');
 		});
 	}
 
@@ -30,7 +33,7 @@ class CreateCaPizzaCheeseTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('ca_pizza_cheese');
+		Schema::drop('ca_pizza');
 	}
 
 }

@@ -19,6 +19,7 @@ class CreateCaPizzaIngredientsTable extends Migration {
 			$table->integer('count', true);
 			$table->timestamps();
 			$table->softDeletes();
+			$table->integer('calories');
 		});
 	}
 
