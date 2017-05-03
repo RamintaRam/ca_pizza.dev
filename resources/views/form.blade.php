@@ -1,6 +1,7 @@
 
 <!DOCTYPE html>
 <html>
+<h3>Pasidaryk savo picą</h3>
 <body style="background-image: url('http://cdn1.buuteeq.com/upload/23279/pizza.jpg.1920x807_default.jpg'); color: #f5f8fa">
 
 @if(isset($name))
@@ -30,14 +31,15 @@ Ingredientai :<br>
 <br>
 Sūris: <br>
 @foreach($cheese as $key => $cheese)
-    {{Form::checkbox('hobbies[]', $key)}}
+    {{Form::checkbox('cheese[]', $key)}}
     {{$cheese}}
     <br>
 @endforeach
 
 
 
-{{ Form::submit('Submit')}}
+{{ Form::submit('Patvirtinti')}}
+{{ Form::reset('Išvalyti') }}
 
 {!! Form::close() !!}
 
