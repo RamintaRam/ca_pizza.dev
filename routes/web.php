@@ -1,5 +1,62 @@
 <?php
 
+Route::group(['prefix' => 'pizza'], function ()
+{
+    Route::get('/', ['uses' => 'CAPizzaController@index']);
+
+    Route::get('/create', ['uses' => 'CAPizzaController@create']);
+    Route::post('/create', ['as' => 'app.pizza.create', 'uses' => 'CAPizzaController@store']);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,10 +103,5 @@ Route::group(['prefix' => 'ingredients'], function ()
 
 
 
-Route::group(['prefix' => 'pizza'], function ()
-{
-    Route::get('/create', ['uses' => 'CAPizzaController@showCreate']);
 
-    Route::post('/create', ['as' => 'app.pizza.create', 'uses' => 'CAPizzaController@create']);
-});
 
