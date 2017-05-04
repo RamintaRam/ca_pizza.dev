@@ -18,7 +18,22 @@ class CAPizzaController extends Controller
      */
     public function index()
     {
-        return CAPizza::with('ingredients')->get();
+        $config = [];
+        $config['list'] = CAPizza::with(['ingredients', 'cheese', 'pad'])->get()->toArray();
+
+        foreach($config['list'] as &$pizza)
+        {
+            $pizza['calories'] = 0;
+            $pizza['calories'] += $pizza['cheese']['calories'];
+            $pizza['calories'] += $pizza['pad']['calories'];
+
+            foreach ($pizza['ingredients'] as $ingredient)
+            {
+                $pizza['calories'] += $ingredient['ingredients']['calories'];
+            }
+        }
+
+        return view('orders', $config);
     }
 
     /**
@@ -58,6 +73,7 @@ class CAPizzaController extends Controller
         ]);
 
         $record->ingredientsInsert()->sync($data['ingredients']);
+
 
         $configuration = [];
         $configuration['cheese'] = CAPizzaCheese::pluck('name', 'id')->toArray();
