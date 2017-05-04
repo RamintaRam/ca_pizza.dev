@@ -27,7 +27,8 @@ class CAPizzaCheeseController extends Controller {
         $data = request()->all();
 
         $record = CAPizzaCheese::create(array(
-            'name' => $data['cheese']
+            'name' => $data['cheese'],
+            'calories' => $data['calories']
 
         ));
 
