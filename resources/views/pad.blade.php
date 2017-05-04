@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <body>
@@ -12,6 +11,9 @@
 
 {{ Form::label('pad', 'Pad')}}
 {{ Form::text('pad') }}
+
+{{ Form::label('calories', 'Calories')}}
+{{ Form::text('calories') }}
 
 {{ Form::submit('Submit')}}
 

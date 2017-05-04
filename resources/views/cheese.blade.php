@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <body>
@@ -6,16 +5,19 @@
 @if(isset($name))
     <div> Sūrio rūšis įvesta {{$name . ', id: ' . $id}}</div>
 
-    @endif
+@endif
 
-    {!! Form::open(['url' => route('app.cheese.create')]) !!}
+{!! Form::open(['url' => route('app.cheese.create')]) !!}
 
-    {{ Form::label('cheese', 'Cheese')}}
-    {{ Form::text('cheese') }}
+{{ Form::label('cheese', 'Cheese')}}
+{{ Form::text('cheese') }}
 
-    {{ Form::submit('Submit')}}
+{{ Form::label('calories', 'Calories')}}
+{{ Form::text('calories') }}
 
-    {!! Form::close() !!}
+{{ Form::submit('Submit')}}
 
-    </body>
-    </html>
+{!! Form::close() !!}
+
+</body>
+</html>
