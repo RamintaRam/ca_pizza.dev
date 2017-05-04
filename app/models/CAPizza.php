@@ -18,4 +18,10 @@ class CAPizza extends CoreModel
         return $this->belongsToMany(CAPizzaIngredients::class, 'ca_pizza_ingredients_connections', 'pizza_id', 'ingredients_id');
     }
 
+    public function ingredients()
+    {
+        return $this->hasMany(CAPizzaIngredientsConnections::class, 'pizza_id', 'id');
+    }
+
+
 }
