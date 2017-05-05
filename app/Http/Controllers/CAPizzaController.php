@@ -57,13 +57,36 @@ class CAPizzaController extends Controller
      * Store a newly created resource in storage.
      * POST /capizza
      *
-     * @return Response
+     * @return mixed
      */
     public function store()
     {
         $data = request()->all();
-if($data['ingredients']>3)
-    return 'Galima pasirinkti tik 3 ingredientus.';
+        $configuration = [];
+        $configuration['cheese'] = CAPizzaCheese::pluck('name', 'id')->toArray();
+        $configuration['calories'] = CAPizzaIngredients::pluck('calories', 'id')->toArray();
+        $configuration['padCalories'] = CAPizzaPad::pluck('calories', 'id')->toArray();
+        $configuration['cheeseCalories'] = CAPizzaCheese::pluck('calories', 'id')->toArray();
+        $configuration['pad'] = CAPizzaPad::pluck('name', 'id')->toArray();
+        $configuration['ingredients'] = CAPizzaIngredients::pluck('ingredients', 'id')->toArray();
+
+        if (sizeof($data['ingredients']) > 3)
+        {
+            $configuration['error'] = ['message' => 'Negali būti daugiau negu 3 ingredientai'];
+
+            return view('form', $configuration);
+        }
+
+        if (sizeof($data['pad']) > 1)
+        {
+            $configuration['error'] = ['message' => 'More than 1'];
+
+            return view('form', $configuration);
+        }
+
+
+
+
         $record = CAPizza::create([
             'name' => $data['name'],
             'cheese_id' => $data['cheese'][0],
@@ -74,17 +97,12 @@ if($data['ingredients']>3)
         $record->ingredientsInsert()->sync($data['ingredients']);
 
 
-        $configuration = [];
-        $configuration['cheese'] = CAPizzaCheese::pluck('name', 'id')->toArray();
-        $configuration['calories'] = CAPizzaIngredients::pluck('calories', 'id')->toArray();
-        $configuration['padCalories'] = CAPizzaPad::pluck('calories', 'id')->toArray();
-        $configuration['cheeseCalories'] = CAPizzaCheese::pluck('calories', 'id')->toArray();
-        $configuration['pad'] = CAPizzaPad::pluck('name', 'id')->toArray();
-        $configuration['ingredients'] = CAPizzaIngredients::pluck('ingredients', 'id')->toArray();
+
         $configuration['record'] = $record;
         //     dd($configuration);
 
         return view('form', $configuration);
+
     }
 
     /**
@@ -121,6 +139,7 @@ if($data['ingredients']>3)
         $configuration['cheeseCalories'] = CAPizzaCheese::pluck('calories', 'id')->toArray();
         $configuration['pad'] = CAPizzaPad::pluck('name', 'id')->toArray();
         $configuration['ingredients'] = CAPizzaIngredients::pluck('ingredients', 'id')->toArray();
+
         $configuration['singlePizza'] = CAPizza::with(['ingredients', 'cheese', 'pad'])->find($id);
 
         $configuration['pizzaIngredients'] = $configuration['singlePizza']->ingredients->pluck('ingredients_id')->toArray();
@@ -132,24 +151,7 @@ if($data['ingredients']>3)
     }
 
 
-//        $config = [];
-//        $config['orderEdit'] = CAPizza::with(['ingredients', 'cheese', 'pad'])->get()->toArray();
-//
-//
-//        foreach($config['orderEdit'] as &$pizza)
-//        {
-//            $pizza['calories'] = 0;
-//            $pizza['calories'] += $pizza['cheese']['calories'];
-//            $pizza['calories'] += $pizza['pad']['calories'];
-//
-//            foreach ($pizza['ingredients'] as $ingredient)
-//            {
-//                $pizza['calories'] += $ingredient['ingredients']['calories'];
-//            }
-//        }
-//
-//            return view('editPizza', $config);
-//   }
+
 
     /**
      * Update the specified resource in storage.
@@ -160,8 +162,31 @@ if($data['ingredients']>3)
      */
     public function update($id)
     {
-        //
+        $data = request()->all();
+        $record = CAPizza::find($id);
+        $record -> update([
+                'name' => $data['name'],
+                'cheese_id' => $data['cheese'][0],
+                'pad_id' => $data['pad'][0],
+                'comment' => $data['comment']
+            ]);
+
+        $record->ingredientsInsert()->sync($data['ingredients']);
+
+        $configuration = [];
+        $configuration['cheese'] = CAPizzaCheese::pluck('name', 'id')->toArray();
+        $configuration['calories'] = CAPizzaIngredients::pluck('calories', 'id')->toArray();
+        $configuration['padCalories'] = CAPizzaPad::pluck('calories', 'id')->toArray();
+        $configuration['cheeseCalories'] = CAPizzaCheese::pluck('calories', 'id')->toArray();
+        $configuration['pad'] = CAPizzaPad::pluck('name', 'id')->toArray();
+        $configuration['ingredients'] = CAPizzaIngredients::pluck('ingredients', 'id')->toArray();
+
+        $configuration['singlePizza'] = $record;//CAPizza::with(['ingredients', 'cheese', 'pad'])->find($id);
+
+        return view('orders', $configuration);
     }
+
+
 
     /**
      * Remove the specified resource from storage.

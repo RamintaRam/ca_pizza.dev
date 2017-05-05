@@ -4,10 +4,10 @@
 <body style="background-image: url('http://cdn1.buuteeq.com/upload/23279/pizza.jpg.1920x807_default.jpg'); color: #f5f8fa">
 
 @if(isset($record))
-    <div style="background-color: green; text-align: center"><h3>Užsakymas pridėtas sėkmingai: {{$record}}</h3></div>
+    <div style="background-color: green; text-align: center"><h3>Užsakymas pakoreguotas sėkmingai: {{$record}}</h3></div>
 @endif
 
-{!! Form::open(['url' => route('app.pizza.create')]) !!}
+{!! Form::open(['url' => route('app.pizza.update', $singlePizza['id'])]) !!}
 
 Picos padas: <br>
 
@@ -53,12 +53,12 @@ Sūris: <br>
 
 
 {{ Form::label('name', 'Telefono nr.')}} <br>
-{{ Form::text('name') }}
+{{ Form::text('name', $singlePizza['name']) }}
 <br>
 <br>
 
 {{ Form::label('comment', 'Komentaras')}} <br>
-{{ Form::textarea('comment') }}
+{{ Form::textarea('comment', $singlePizza['comment']) }}
 
 <br>
 <br>
