@@ -18,8 +18,10 @@
         </td>
         <td>{{$pizza['comment']}}</td>
         <td>{{$pizza['calories']}}</td>
+        <td><a href={{action('CAPizzaController@edit', $pizza['id'])}}><button style="color: #f5f8fa; background-color: darkgreen">Pakeisti duomenis</button></a></td>
     </tr>
 @endforeach
+
 </table>
 
 </body>

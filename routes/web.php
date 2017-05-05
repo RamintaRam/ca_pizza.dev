@@ -2,7 +2,7 @@
 
 Route::group(['prefix' => 'pizza'], function ()
 {
-    Route::get('/', ['uses' => 'CAPizzaController@index']);
+    Route::get('/', ['as' => 'app.pizza.list', 'uses' => 'CAPizzaController@index']);
 
     Route::get('/create', ['uses' => 'CAPizzaController@create']);
     Route::post('/create', ['as' => 'app.pizza.create', 'uses' => 'CAPizzaController@store']);
