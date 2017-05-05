@@ -21,14 +21,12 @@ class CAPizzaController extends Controller
         $config = [];
         $config['list'] = CAPizza::with(['ingredients', 'cheese', 'pad'])->get()->toArray();
 
-        foreach($config['list'] as &$pizza)
-        {
+        foreach ($config['list'] as &$pizza) {
             $pizza['calories'] = 0;
             $pizza['calories'] += $pizza['cheese']['calories'];
             $pizza['calories'] += $pizza['pad']['calories'];
 
-            foreach ($pizza['ingredients'] as $ingredient)
-            {
+            foreach ($pizza['ingredients'] as $ingredient) {
                 $pizza['calories'] += $ingredient['ingredients']['calories'];
             }
         }
@@ -64,7 +62,8 @@ class CAPizzaController extends Controller
     public function store()
     {
         $data = request()->all();
-
+if($data['ingredients']>3)
+    return 'Galima pasirinkti tik 3 ingredientus.';
         $record = CAPizza::create([
             'name' => $data['name'],
             'cheese_id' => $data['cheese'][0],
@@ -97,7 +96,13 @@ class CAPizzaController extends Controller
      */
     public function show($id)
     {
-        //
+        $config = [];
+        $config['singlePizza'] = CAPizza::with(['ingredients', 'cheese', 'pad'])->find($id);
+        $config['route'] = route('app.pizza.update', $id);
+
+        return view('singlePizza', $config);
+
+
     }
 
     /**
@@ -109,8 +114,42 @@ class CAPizzaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $configuration = [];
+        $configuration['cheese'] = CAPizzaCheese::pluck('name', 'id')->toArray();
+        $configuration['calories'] = CAPizzaIngredients::pluck('calories', 'id')->toArray();
+        $configuration['padCalories'] = CAPizzaPad::pluck('calories', 'id')->toArray();
+        $configuration['cheeseCalories'] = CAPizzaCheese::pluck('calories', 'id')->toArray();
+        $configuration['pad'] = CAPizzaPad::pluck('name', 'id')->toArray();
+        $configuration['ingredients'] = CAPizzaIngredients::pluck('ingredients', 'id')->toArray();
+        $configuration['singlePizza'] = CAPizza::with(['ingredients', 'cheese', 'pad'])->find($id);
+
+        $configuration['pizzaIngredients'] = $configuration['singlePizza']->ingredients->pluck('ingredients_id')->toArray();
+
+        $configuration['singlePizza'] = $configuration['singlePizza']->toArray();
+
+        return view('editPizza', $configuration);
+
     }
+
+
+//        $config = [];
+//        $config['orderEdit'] = CAPizza::with(['ingredients', 'cheese', 'pad'])->get()->toArray();
+//
+//
+//        foreach($config['orderEdit'] as &$pizza)
+//        {
+//            $pizza['calories'] = 0;
+//            $pizza['calories'] += $pizza['cheese']['calories'];
+//            $pizza['calories'] += $pizza['pad']['calories'];
+//
+//            foreach ($pizza['ingredients'] as $ingredient)
+//            {
+//                $pizza['calories'] += $ingredient['ingredients']['calories'];
+//            }
+//        }
+//
+//            return view('editPizza', $config);
+//   }
 
     /**
      * Update the specified resource in storage.

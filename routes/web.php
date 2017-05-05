@@ -6,51 +6,12 @@ Route::group(['prefix' => 'pizza'], function ()
 
     Route::get('/create', ['uses' => 'CAPizzaController@create']);
     Route::post('/create', ['as' => 'app.pizza.create', 'uses' => 'CAPizzaController@store']);
+
+    Route::get('/{id}', ['uses' => 'CAPizzaController@show']);
+
+    Route::get('/{id}/edit', ['uses' => 'CAPizzaController@edit']);
+    Route::post('/{id}/edit', ['as' => 'app.pizza.update','uses' => 'CAPizzaController@update']);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

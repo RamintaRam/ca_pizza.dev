@@ -12,7 +12,7 @@ class CoreModel extends Model
 
     public $incrementing = false;
 
-    protected $hidden = ['ingredients_id', 'cheese_id', 'pad_id', 'count', 'created_at', 'updated_at', 'deleted_at'];
+    protected $hidden = ['count', 'created_at', 'updated_at', 'deleted_at'];
 
     protected static function boot()
     {
